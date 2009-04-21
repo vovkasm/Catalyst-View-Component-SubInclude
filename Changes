@@ -1,5 +1,9 @@
 Revision history for Catalyst-View-Component-SubInclude
 
+0.05    Tue Apr 21 19:16:00 2009
+        - Change attribute constraint from ClassName to Str to fix issue with
+          newer Catalyst versions
+
 0.04    Wed Feb 11 00:38:02 2009
         - Recreate dist because the CPAN indexer doesn't like tarballs generated 
           on Windows.

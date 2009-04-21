@@ -10,11 +10,11 @@ Catalyst::View::Component::SubInclude - Use subincludes in your Catalyst views
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -104,7 +104,7 @@ in runtime. It expects a fully qualified class name.
 
 has 'subinclude_plugin' => (
     is => 'rw',
-    isa => 'ClassName'
+    isa => 'Str'
 );
 
 around 'new' => sub {
