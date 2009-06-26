@@ -11,6 +11,7 @@ requires 'Moose';
 requires 'Moose::Role';
 requires 'Carp';
 requires 'namespace::clean';
+requires 'Task::Weaken';
 
 catalyst;
 

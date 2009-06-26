@@ -3,6 +3,7 @@ use Moose::Role;
 
 use Carp qw/croak/;
 use namespace::clean qw/croak/;
+use Scalar::Util qw/weaken/;
 
 =head1 NAME
 
@@ -14,7 +15,7 @@ Version 0.05
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 SYNOPSIS
 
@@ -122,7 +123,9 @@ around 'new' => sub {
 around 'render' => sub {
     my $next = shift;
     my ($self, $c, @args) = @_;
-    
+   
+    weaken $c; 
+
     $c->stash->{subinclude}       = sub { $self->_subinclude( $c, @_ ) };
     $c->stash->{subinclude_using} = sub { $self->_subinclude_using( $c, @_ ) };
 

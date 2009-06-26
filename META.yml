@@ -3,7 +3,7 @@ abstract: 'Use subincludes in your Catalyst views'
 author:
   - 'Nilson Santos Figueiredo Junior, C<< <nilsonsfj at cpan.org> >>'
 distribution_type: module
-generated_by: 'Module::Install version 0.77'
+generated_by: 'Module::Install version 0.79'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,7 +19,8 @@ requires:
   Catalyst::Runtime: 5.70000
   Moose: 0
   Moose::Role: 0
+  Task::Weaken: 0
   namespace::clean: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.05
+version: 0.06
