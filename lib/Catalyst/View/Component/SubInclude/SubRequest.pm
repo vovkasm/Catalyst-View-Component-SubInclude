@@ -11,11 +11,11 @@ Catalyst::View::Component::SubInclude::SubRequest - Sub-requests plugin for C::V
 
 =head1 VERSION
 
-Version 0.05
+Version 0.07
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
