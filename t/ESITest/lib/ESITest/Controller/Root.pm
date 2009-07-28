@@ -87,6 +87,25 @@ sub time_args_without_capture : Chained('base') PathPart('time') Args(1) {
     $c->stash->{template} = 'time_include.tt';
 }
 
+sub time_args_no_chained : Path('time_args_no_chained') Args {
+    my ($self, $c, @args) = @_;
+
+    my $params = $c->req->params;
+
+    $c->stash->{current_time} = localtime();
+
+    my $additional = '';
+    for my $key (keys %$params) {
+        $additional .= " | $key = $params->{$key} | "
+    }
+
+    $additional .= " No Chained Args: " . join ', ', @args;
+
+    $c->stash->{additional} = $additional;
+
+    $c->stash->{template} = 'time_include.tt';
+}
+
 sub end : ActionClass('RenderView') {}
 
 1;
