@@ -1,6 +1,8 @@
-# IMPORTANT: if you delete this file your app will not work as
-# expected.  you have been warned
-use inc::Module::Install;
+use strict;
+use warnings;
+use inc::Module::Install 0.91;
+use Module::Install::AuthorRequires;
+use Module::Install::AuthorTests;
 
 name 'Catalyst-View-Component-SubInclude';
 all_from 'lib/Catalyst/View/Component/SubInclude.pm';
@@ -13,6 +15,10 @@ requires 'Carp';
 requires 'namespace::clean';
 
 test_requires 'Catalyst::View::TT';
+
+author_requires 'Test::Pod::Coverage' => '1.04';
+author_requires 'Test::Pod' => '1.14';
+author_tests 't/author';
 
 catalyst;
 
