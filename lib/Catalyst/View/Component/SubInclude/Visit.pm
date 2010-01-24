@@ -1,9 +1,7 @@
 package Catalyst::View::Component::SubInclude::Visit;
-use warnings;
-use strict;
-
+use Moose;
 use Carp qw/croak/;
-use namespace::clean;
+use namespace::clean -except => 'meta';
 
 =head1 NAME
 
@@ -104,4 +102,5 @@ under the same terms as Perl itself.
 
 =cut
 
+__PACKAGE__->meta->make_immutable;
 1;
