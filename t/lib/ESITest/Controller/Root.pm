@@ -31,7 +31,7 @@ sub time_include : Chained('base') PathPart('time') Args(0) {
 
 sub capture : Chained('base') PathPart('') CaptureArgs(1) {
     my ( $self, $c, $arg ) = @_;
-    $c->log->debug("Capture: $arg");
+    $c->log->debug("Capture: $arg") if $c->debug;
     $c->stash->{additional} = "Capture Arg: $arg";
 }
 
