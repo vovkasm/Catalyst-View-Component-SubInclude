@@ -2,8 +2,9 @@ package Catalyst::View::Component::SubInclude;
 use Moose::Role;
 
 use Carp qw/croak/;
-use Scalar::Util qw/weaken/;
 use namespace::clean -except => 'meta';
+
+with 'Catalyst::Component::ContextClosure';
 
 =head1 NAME
 
@@ -122,11 +123,9 @@ around 'new' => sub {
 
 before 'render' => sub {
     my ($self, $c, @args) = @_;
-   
-    weaken $c; 
 
-    $c->stash->{subinclude}       = sub { $self->_subinclude( $c, @_ ) };
-    $c->stash->{subinclude_using} = sub { $self->_subinclude_using( $c, @_ ) };
+    $c->stash->{subinclude}       = $self->make_context_closure(sub { $self->_subinclude( @_ ) }, $c);
+    $c->stash->{subinclude_using} = $self->make_context_closure(sub { $self->_subinclude_using( @_ ) }, $c);
 };
 
 sub set_subinclude_plugin {
