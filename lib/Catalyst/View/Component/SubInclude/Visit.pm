@@ -59,13 +59,13 @@ with the other plugins.
 =cut
 
 sub generate_subinclude {
-    my ($class, $c, $path, @params) = @_;
+    my ($class, $config, $c, $path, @params) = @_;
 
     croak "subincludes through visit() require Catalyst version 5.71000 or newer"
         unless $c->can('visit');
 
     {
-        local $c->{stash} = {};
+        local $c->{stash} = $config->{keep_stash} ? $c->{stash} : {};
         
         local $c->request->{parameters} = 
             ref $params[-1] eq 'HASH' ? pop @params : {};

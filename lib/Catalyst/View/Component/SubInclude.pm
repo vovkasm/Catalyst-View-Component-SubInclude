@@ -2,6 +2,7 @@ package Catalyst::View::Component::SubInclude;
 use Moose::Role;
 
 use Carp qw/croak/;
+use Catalyst::Utils ();
 use namespace::clean -except => 'meta';
 
 with 'Catalyst::Component::ContextClosure';
@@ -143,7 +144,8 @@ sub _subinclude {
 sub _subinclude_using {
     my ($self, $c, $plugin, @args) = @_;
     $plugin = $self->_subinclude_plugin_class_name($plugin);
-    $plugin->generate_subinclude( $c, @args );
+    my $plugin_config = Catalyst::Utils::merge_hashes($self->config->{subinclude}->{ALL}||{}, $self->config->{subinclude}->{$plugin}||{});
+    $plugin->generate_subinclude( $plugin_config, $c, @args );
 }
 
 sub _subinclude_plugin_class_name {

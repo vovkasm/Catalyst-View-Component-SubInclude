@@ -55,7 +55,7 @@ common interface for plugins.
 =cut
 
 sub generate_subinclude {
-    my ($class, $c, $path, @params) = @_;
+    my ($class, $config, $c, $path, @params) = @_;
 
     my $uri = $c->uri_for_action( $path, @params );
 

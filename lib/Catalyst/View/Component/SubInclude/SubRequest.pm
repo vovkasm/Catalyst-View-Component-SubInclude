@@ -71,8 +71,8 @@ common interface for all plugins.
 =cut
 
 sub generate_subinclude {
-    my ($class, $c, $path, @params) = @_;
-    my $stash = {};
+    my ($class, $config, $c, $path, @params) = @_;
+    my $stash = $config->{keep_stash} ? { %{ $c->stash } } : {};
 
     croak "subincludes through subrequests require Catalyst::Plugin::SubRequest"
         unless $c->can('sub_request');
