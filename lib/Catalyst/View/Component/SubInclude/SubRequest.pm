@@ -3,6 +3,7 @@ use warnings;
 use strict;
 
 use Carp qw/croak/;
+use Scalar::Util qw/blessed/;
 use namespace::clean;
 
 =head1 NAME
@@ -76,13 +77,13 @@ sub generate_subinclude {
     croak "subincludes through subrequests require Catalyst::Plugin::SubRequest"
         unless $c->can('sub_request');
 
-    my $args  = ref $params[0]  eq 'ARRAY' ? shift @params : [];
-    my $query = ref $params[-1] eq 'HASH'  ?   pop @params : {};
+    my $query = ref $params[-1] eq 'HASH' ? pop @params : {};
     
-    my $dispatcher = $c->dispatcher;
-    my ($action) = $dispatcher->_invoke_as_path( $c, $path, $args );
+    my $action = blessed($path)
+          ? $path
+          : $c->dispatcher->get_action_by_path($path);
 
-    my $uri = $c->uri_for( $action, $args, @params );
+    my $uri = $c->uri_for( $action, @params );
 
     $c->sub_request( $uri->path, $stash, $query );
 }
