@@ -5,11 +5,8 @@ use warnings;
 
 use Catalyst::Runtime '5.70';
 
-use parent qw/Catalyst/;
+use base qw/Catalyst/;
 use Catalyst qw/
-    -Debug
-    ConfigLoader
-    Static::Simple
     SubRequest
 /;
 
