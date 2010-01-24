@@ -2,8 +2,8 @@ package Catalyst::View::Component::SubInclude;
 use Moose::Role;
 
 use Carp qw/croak/;
-use namespace::clean qw/croak/;
 use Scalar::Util qw/weaken/;
+use namespace::clean -except => 'meta';
 
 =head1 NAME
 

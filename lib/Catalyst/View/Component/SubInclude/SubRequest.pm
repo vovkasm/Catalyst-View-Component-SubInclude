@@ -3,7 +3,7 @@ use warnings;
 use strict;
 
 use Carp qw/croak/;
-use namespace::clean qw/croak/;
+use namespace::clean;
 
 =head1 NAME
 
