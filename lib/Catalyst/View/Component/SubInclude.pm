@@ -3,6 +3,8 @@ use Moose::Role;
 
 use Carp qw/croak/;
 use Catalyst::Utils ();
+use Class::MOP ();
+use MooseX::Types::Moose qw/Str HashRef/;
 use namespace::clean -except => 'meta';
 
 with 'Catalyst::Component::ContextClosure';
@@ -107,7 +109,7 @@ in runtime. It expects a fully qualified class name.
 
 has 'subinclude_plugin' => (
     is => 'rw',
-    isa => 'Str'
+    isa => Str,
 );
 
 around 'new' => sub {
@@ -132,7 +134,7 @@ before 'render' => sub {
 sub set_subinclude_plugin {
     my ($self, $plugin) = @_;
 
-    my $subinclude_class = $self->_subinclude_plugin_class_name( $plugin );
+    my $subinclude_class = blessed $self->_subinclude_plugin_class_instance( $plugin );
     $self->subinclude_plugin( $subinclude_class );
 }
 
@@ -143,24 +145,32 @@ sub _subinclude {
 
 sub _subinclude_using {
     my ($self, $c, $plugin, @args) = @_;
-    $plugin = $self->_subinclude_plugin_class_name($plugin);
-    my $plugin_config = Catalyst::Utils::merge_hashes($self->config->{subinclude}->{ALL}||{}, $self->config->{subinclude}->{$plugin}||{});
-    $plugin->new($plugin_config)->generate_subinclude( $c, @args );
+    $plugin = $self->_subinclude_plugin_class_instance($plugin);
+    $plugin->generate_subinclude( $c, @args );
 }
 
-sub _subinclude_plugin_class_name {
+has _subinclude_plugin_class_instance_cache => (
+    isa => HashRef,
+    is => 'ro',
+    default => sub { {} },
+);
+
+sub _subinclude_plugin_class_instance {
     my ($self, $plugin) = @_;
     
-    # check if name is already fully qualified
-    my $pkg = __PACKAGE__;
-    return $plugin if $plugin =~ /^$pkg/;
+    my $class = $plugin =~ /::/ ? $plugin : __PACKAGE__ . '::' . $plugin;
 
-    my $class_name = __PACKAGE__ . '::' . $plugin;
+    my $cache = $self->_subinclude_plugin_class_instance_cache;
+    return $cache->{$plugin} if exists $cache->{$plugin};
+
+    my $plugin_config = Catalyst::Utils::merge_hashes(
+        $self->config->{subinclude}->{ALL}||{},
+        $self->config->{subinclude}->{$plugin}||{}
+    );
     
-    eval "require $class_name";
-    croak "Error requiring $class_name: $@" if $@;
+    Class::MOP::load_class($class);
 
-    $class_name;
+    return $cache->{$plugin} = $class->new($plugin_config);
 }
 
 =head1 SEE ALSO
