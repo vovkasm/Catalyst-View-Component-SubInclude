@@ -73,7 +73,7 @@ sub generate_subinclude {
         local $c->response->{body};
 
         my $captures = ref $params[0] eq 'ARRAY' ? shift @params : [];
-        $c->visit( $path, \@params, $captures );
+        $c->visit( $path, $captures, \@params );
 
         return $c->response->{body};
     }
