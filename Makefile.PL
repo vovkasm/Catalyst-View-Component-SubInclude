@@ -11,6 +11,7 @@ requires 'Catalyst::Runtime' => '5.80014';
 requires 'Catalyst::Plugin::SubRequest';
 requires 'Moose';
 requires 'Moose::Role';
+requires 'MooseX::Types';
 requires 'Carp';
 requires 'namespace::clean';
 

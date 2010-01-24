@@ -145,7 +145,7 @@ sub _subinclude_using {
     my ($self, $c, $plugin, @args) = @_;
     $plugin = $self->_subinclude_plugin_class_name($plugin);
     my $plugin_config = Catalyst::Utils::merge_hashes($self->config->{subinclude}->{ALL}||{}, $self->config->{subinclude}->{$plugin}||{});
-    $plugin->generate_subinclude( $plugin_config, $c, @args );
+    $plugin->new($plugin_config)->generate_subinclude( $c, @args );
 }
 
 sub _subinclude_plugin_class_name {

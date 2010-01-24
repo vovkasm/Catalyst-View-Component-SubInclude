@@ -1,6 +1,7 @@
 package Catalyst::View::Component::SubInclude::SubRequest;
 use Moose;
 use Carp qw/croak/;
+use MooseX::Types::Moose qw/ Bool /;
 use namespace::clean -except => 'meta';
 
 =head1 NAME
@@ -67,9 +68,15 @@ common interface for all plugins.
 
 =cut
 
+has keep_stash => (
+    isa => Bool,
+    is => 'ro',
+    default => 0,
+);
+
 sub generate_subinclude {
-    my ($class, $config, $c, $path, @params) = @_;
-    my $stash = $config->{keep_stash} ? { %{ $c->stash } } : {};
+    my ($self, $c, $path, @params) = @_;
+    my $stash = $self->keep_stash ? { %{ $c->stash } } : {};
 
     croak "subincludes through subrequests require Catalyst::Plugin::SubRequest"
         unless $c->can('sub_request');

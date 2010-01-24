@@ -1,6 +1,7 @@
 package Catalyst::View::Component::SubInclude::Visit;
 use Moose;
 use Carp qw/croak/;
+use MooseX::Types::Moose qw/ Bool /;
 use namespace::clean -except => 'meta';
 
 =head1 NAME
@@ -56,14 +57,20 @@ with the other plugins.
 
 =cut
 
+has keep_stash => (
+    isa => Bool,
+    is => 'ro',
+    default => 0,
+);
+
 sub generate_subinclude {
-    my ($class, $config, $c, $path, @params) = @_;
+    my ($self, $c, $path, @params) = @_;
 
     croak "subincludes through visit() require Catalyst version 5.71000 or newer"
         unless $c->can('visit');
 
     {
-        local $c->{stash} = $config->{keep_stash} ? $c->{stash} : {};
+        local $c->{stash} = $self->keep_stash ? $c->{stash} : {};
         
         local $c->request->{parameters} = 
             ref $params[-1] eq 'HASH' ? pop @params : {};
