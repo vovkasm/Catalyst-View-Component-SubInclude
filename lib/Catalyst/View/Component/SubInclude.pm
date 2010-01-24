@@ -120,16 +120,13 @@ around 'new' => sub {
     $self;
 };
 
-around 'render' => sub {
-    my $next = shift;
+before 'render' => sub {
     my ($self, $c, @args) = @_;
    
     weaken $c; 
 
     $c->stash->{subinclude}       = sub { $self->_subinclude( $c, @_ ) };
     $c->stash->{subinclude_using} = sub { $self->_subinclude_using( $c, @_ ) };
-
-    $self->$next( $c, @args );
 };
 
 sub set_subinclude_plugin {
