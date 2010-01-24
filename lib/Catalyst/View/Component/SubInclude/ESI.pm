@@ -57,12 +57,7 @@ common interface for plugins.
 sub generate_subinclude {
     my ($class, $c, $path, @params) = @_;
 
-    my $args = ref $params[0] eq 'ARRAY' ? shift @params : [];
-    
-    my $dispatcher = $c->dispatcher;
-    my ($action) = $dispatcher->_invoke_as_path( $c, $path, $args );
-
-    my $uri = $c->uri_for( $action, $args, @params );
+    my $uri = $c->uri_for_action( $path, @params );
 
     return '<!--esi <esi:include src="' . $uri->path_query . '" /> -->';
 }
