@@ -24,5 +24,7 @@ author_tests 't/author';
 
 catalyst;
 
+resources repository => 'git://git.shadowcat.co.uk/catagits/Catalyst-View-Component-SubInclude';
+
 auto_install;
 WriteAll;
