@@ -192,11 +192,17 @@ your bug as I make changes.
 
 Nilson Santos Figueiredo Junior, C<< <nilsonsfj at cpan.org> >>
 
+=head1 CONTRIBUTORS
+
+Tomas Doran (t0m) C<< <bobtfish@bobtfish.net >>.
+
 =head1 SPONSORSHIP
 
 Development sponsored by Ionzero LLC L<http://www.ionzero.com/>.
 
 =head1 COPYRIGHT & LICENSE
+
+Copyright (C) 2010 Nilson Santos Figueiredo Junior and the above contributors.
 
 Copyright (C) 2009 Nilson Santos Figueiredo Junior.
 
