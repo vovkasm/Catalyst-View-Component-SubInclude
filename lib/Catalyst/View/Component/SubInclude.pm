@@ -41,46 +41,46 @@ Then, somewhere in your templates:
 
 C<Catalyst::View::Component::SubInclude> allows you to include content in your
 templates (or, more generally, somewhere in your view's C<render> processing)
-which comes from another action in your application. It's implemented as a 
+which comes from another action in your application. It's implemented as a
 L<Moose::Role|Moose::Role>, so using L<Moose|Moose> in your view is required.
 
 Simply put, it's a way to include the output of a Catalyst sub-request somewhere
-in your page. 
+in your page.
 
-It's built in an extensible way so that you're free to use sub-requests, Varnish 
-ESI (L<http://www.catalystframework.org/calendar/2008/17>) or any other 
+It's built in an extensible way so that you're free to use sub-requests, Varnish
+ESI (L<http://www.catalystframework.org/calendar/2008/17>) or any other
 sub-include plugin you might want to implement. An LWP plugin seems useful and
 might be developed in the future.
 
 =head1 STASH FUNCTIONS
 
 This component does its magic by exporting a C<subinclude> coderef entry to the
-stash. This way, it's easily accessible by the templates (which is the most 
+stash. This way, it's easily accessible by the templates (which is the most
 common use-case).
 
 =head2 C<subinclude( $path, @args )>
 
-This will render and return the body of the included resource (as specified by 
+This will render and return the body of the included resource (as specified by
 C<$path>) using the default subinclude plugin.
 
 =head2 C<subinclude_using( $plugin, $path, @args )>
 
-This will render and return the body of the included resource (as specified by 
+This will render and return the body of the included resource (as specified by
 C<$path>) using the specified subinclude plugin.
 
-The C<subinclude> function above is implemented basically as a shortcut which 
+The C<subinclude> function above is implemented basically as a shortcut which
 calls this function using the default plugin as the first parameter.
 
 =head1 SUBINCLUDE PLUGINS
 
-The module comes with two subinclude plugins: 
+The module comes with two subinclude plugins:
 L<SubRequest|Catalyst::Plugin::View::Component::SubRequest>,
-L<Visit|Catalyst::Plugin::View::Component::Visit> and 
+L<Visit|Catalyst::Plugin::View::Component::Visit> and
 L<ESI|Catalyst::Plugin::View::Component::ESI>.
 
-By default, the C<SubRequest> plugin will be used. This can be changed in the 
+By default, the C<SubRequest> plugin will be used. This can be changed in the
 view's configuration options (either in the config file or in the view module
-itself). 
+itself).
 
 Configuration file example:
 
@@ -91,12 +91,12 @@ Configuration file example:
 =head2 C<set_subinclude_plugin( $plugin )>
 
 This method changes the current active subinclude plugin in runtime. It expects
-the plugin suffix (e.g. C<ESI> or C<SubRequest>) or a fully-qualified class 
+the plugin suffix (e.g. C<ESI> or C<SubRequest>) or a fully-qualified class
 name in the C<Catalyst::View::Component::SubInclude> namespace.
 
 =head2 Writing plugins
 
-If writing your own plugin, keep in kind plugins are required to implement a 
+If writing your own plugin, keep in kind plugins are required to implement a
 class method C<generate_subinclude> with the following signature:
 
   sub generate_subinclude {
@@ -116,12 +116,12 @@ has 'subinclude_plugin' => (
 around 'new' => sub {
     my $next = shift;
     my $class = shift;
-    
+
     my $self = $class->$next( @_ );
-    
+
     my $subinclude_plugin = $self->config->{subinclude_plugin} || 'SubRequest';
     $self->set_subinclude_plugin( $subinclude_plugin );
-    
+
     $self;
 };
 
@@ -158,7 +158,7 @@ has _subinclude_plugin_class_instance_cache => (
 
 sub _subinclude_plugin_class_instance {
     my ($self, $plugin) = @_;
-    
+
     my $class = $plugin =~ /::/ ? $plugin : __PACKAGE__ . '::' . $plugin;
 
     my $cache = $self->_subinclude_plugin_class_instance_cache;
@@ -168,7 +168,7 @@ sub _subinclude_plugin_class_instance {
         $self->config->{subinclude}->{ALL}||{},
         $self->config->{subinclude}->{$plugin}||{}
     );
-    
+
     Class::MOP::load_class($class);
 
     return $cache->{$plugin} = $class->new($plugin_config);
@@ -176,7 +176,7 @@ sub _subinclude_plugin_class_instance {
 
 =head1 SEE ALSO
 
-L<Catalyst::Plugin::SubRequest|Catalyst::Plugin::SubRequest>, 
+L<Catalyst::Plugin::SubRequest|Catalyst::Plugin::SubRequest>,
 L<Moose::Role|Moose::Role>, L<Moose|Moose>,
 L<http://www.catalystframework.org/calendar/2008/17>
 
