@@ -17,6 +17,7 @@ requires 'namespace::clean';
 
 test_requires 'Test::More' => '0.88';
 test_requires 'Catalyst::View::TT';
+test_requires 'Catalyst::Action::RenderView';
 
 author_requires 'Test::Pod::Coverage' => '1.04';
 author_requires 'Test::Pod' => '1.14';
