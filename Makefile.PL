@@ -27,5 +27,10 @@ catalyst;
 
 resources repository => 'git://git.shadowcat.co.uk/catagits/Catalyst-View-Component-SubInclude';
 
+if ($Module::Install::AUTHOR) {
+    system("pod2text lib/Catalyst/View/Component/SubInclude.pm > README")
+        and die $!
+}
+
 auto_install;
 WriteAll;
