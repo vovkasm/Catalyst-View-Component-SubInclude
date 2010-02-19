@@ -1,5 +1,8 @@
 Revision history for Catalyst-View-Component-SubInclude
 
+0.07_02 Fri Feb 19 00:11:00 2010
+        - Fix missing test_requires dependency on Catalyst::Action::RenderView.
+
 0.07_01 Mon Feb 15 22:41:54 2010
         - It is now possible to configure plugins, and the subrequest
           and visit plugins can be configured to not replace the stash
