@@ -10,11 +10,12 @@ Catalyst::View::Component::SubInclude::SubRequest - Sub-requests plugin for C::V
 
 =head1 VERSION
 
-Version 0.07
+Version 0.07_03
 
 =cut
 
-our $VERSION = '0.07';
+our $VERSION = '0.07_03';
+$VERSION = eval $VERSION;
 
 =head1 SYNOPSIS
 

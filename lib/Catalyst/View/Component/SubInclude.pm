@@ -15,11 +15,11 @@ Catalyst::View::Component::SubInclude - Use subincludes in your Catalyst views
 
 =head1 VERSION
 
-Version 0.07_01
+Version 0.07_03
 
 =cut
 
-our $VERSION = '0.07_02';
+our $VERSION = '0.07_03';
 $VERSION = eval $VERSION;
 
 =head1 SYNOPSIS
