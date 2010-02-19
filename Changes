@@ -1,5 +1,8 @@
 Revision history for Catalyst-View-Component-SubInclude
 
+       - Fix missing test_requires dependency on parent by dropping use of
+         that module.
+
 0.07_02 Fri Feb 19 00:11:00 2010
         - Fix missing test_requires dependency on Catalyst::Action::RenderView.
 
