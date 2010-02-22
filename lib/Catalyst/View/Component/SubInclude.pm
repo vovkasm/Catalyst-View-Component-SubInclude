@@ -47,10 +47,13 @@ L<Moose::Role|Moose::Role>, so using L<Moose|Moose> in your view is required.
 Simply put, it's a way to include the output of a Catalyst sub-request somewhere
 in your page.
 
-It's built in an extensible way so that you're free to use sub-requests, Varnish
-ESI (L<http://www.catalystframework.org/calendar/2008/17>) or any other
+It's built in an extensible way so that you're free to use sub-requests,
+Varnish ESI (L<http://www.catalystframework.org/calendar/2008/17>) or any other
 sub-include plugin you might want to implement. An LWP plugin seems useful and
-might be developed in the future.
+might be developed in the future. If you need to address a resource by it's
+public path (i.e. the path part trailing C<http://example.com/myapp> then you
+will need to use L<Catalyst::Plugin::SubRequest> directly, and not this
+component.
 
 =head1 STASH FUNCTIONS
 
