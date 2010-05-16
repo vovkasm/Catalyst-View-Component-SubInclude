@@ -3,7 +3,7 @@ NAME
     views
 
 VERSION
-    Version 0.07_03
+    Version 0.08
 
 SYNOPSIS
       package MyApp::View::TT;

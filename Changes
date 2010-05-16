@@ -1,5 +1,8 @@
 Revision history for Catalyst-View-Component-SubInclude
 
+0.08  Sun 16 May 15:52:00 2010
+      - Released 0.07_03 with no further changes.
+
 0.07_03 Fri Feb 19 00:31:00 2010
       - Autogenerate README file from Pod.
       - Fix missing test_requires dependency on parent by dropping use of
