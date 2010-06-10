@@ -47,7 +47,7 @@ path is handled internally. After translation, this will roughly translate to
 the following code:
 
   my $url = $c->uri_for( $translated_path, @args )->path_query;
-  return '<!--# include virtual="$url" -->';
+  return '<!--#include virtual="$url" -->';
 
 Notice that the stash will always be empty. This behavior could be configurable
 in the future through an additional switch - for now, this behavior guarantees a
@@ -60,7 +60,7 @@ sub generate_subinclude {
 
     my $uri = $c->uri_for_action( $path, @params );
 
-    return '<!--# include virtual="' . $uri->path_query . '" -->';
+    return '<!--#include virtual="' . $uri->path_query . '" -->';
 }
 
 =head1 SEE ALSO
