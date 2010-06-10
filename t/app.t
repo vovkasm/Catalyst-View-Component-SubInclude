@@ -20,6 +20,8 @@ Current time is: [\w\s:]+ --> | plugin = SubRequest |
 Current time is: [\w\s:]+ --> | plugin = Visit | 
 <br/>
 <!--esi <esi:include src="/time?plugin=ESI" /> --><br/>
+<br/>
+<!--# include virtual="/time?plugin=SSI" --><br/>
 
 <br/><br/>
 
@@ -57,6 +59,17 @@ Test CaptureArgs and Args interaction (ESI):<br/><br/>
 <br/>
 
 <!--esi <esi:include src="/time/regular_arg?query_arg=val" /> --><br/>
+(using: http://localhost/time/regular_arg?query_arg=val)<br/>
+
+<br/><br/>
+
+Test CaptureArgs and Args interaction (SSI):<br/><br/>
+
+<!--# include virtual="/capture_argtest/time/regular_arg?query_arg=val" --><br/>
+(using: http://localhost/capture_argtest/time/regular_arg?query_arg=val)<br/>
+<br/>
+
+<!--# include virtual="/time/regular_arg?query_arg=val" --><br/>
 (using: http://localhost/time/regular_arg?query_arg=val)<br/>
 
 <br/><br/><br/>

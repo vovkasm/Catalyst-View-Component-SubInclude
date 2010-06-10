@@ -7,6 +7,7 @@ Test subinclude using specific plugins:<br/>
 [% subinclude_using('SubRequest', '/time_include', { 'plugin' => 'SubRequest'} ) %]<br/>
 [% subinclude_using('Visit', '/time_include', { 'plugin' => 'Visit'} ) %]<br/>
 [% subinclude_using('ESI', '/time_include', { 'plugin' => 'ESI'} ) %]<br/>
+[% subinclude_using('SSI', '/time_include', { 'plugin' => 'SSI'} ) %]<br/>
 
 <br/><br/>
 
@@ -40,6 +41,17 @@ Test CaptureArgs and Args interaction (ESI):<br/><br/>
 <br/>
 
 [% subinclude_using('ESI', '/time_args_without_capture', 'regular_arg', { query_arg => 'val' }) %]<br/>
+(using: [% c.uri_for( c.controller.action_for('time_args_without_capture'), 'regular_arg', { query_arg => 'val' } ) %])<br/>
+
+<br/><br/>
+
+Test CaptureArgs and Args interaction (SSI):<br/><br/>
+
+[% subinclude_using('SSI', '/time_args_with_args', ['capture_argtest'], 'regular_arg', { query_arg => 'val' } ) %]<br/>
+(using: [% c.uri_for( c.controller.action_for('time_args_with_args'), ['capture_argtest'], 'regular_arg', { query_arg => 'val' } ) %])<br/>
+<br/>
+
+[% subinclude_using('SSI', '/time_args_without_capture', 'regular_arg', { query_arg => 'val' }) %]<br/>
 (using: [% c.uri_for( c.controller.action_for('time_args_without_capture'), 'regular_arg', { query_arg => 'val' } ) %])<br/>
 
 <br/><br/><br/>
